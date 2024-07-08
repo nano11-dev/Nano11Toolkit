@@ -28,5 +28,15 @@
     "QueryValue": "DisableSpotlightCollectionOnDesktop",
     "EnabledOutput": "0x0",
     "Enabled": false
+  },
+  {
+    "Name": "Settings Home Page",
+    "Description": "Toggles PUP.SettingsHome",
+    "EnableCommand": "reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v SettingsPageVisibility /t REG_SZ /d \"hide:-\" /f",
+    "DisableCommand": "reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v SettingsPageVisibility /t REG_SZ /d \"hide:home\" /f",
+    "QueryKey": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+    "QueryValue": "SettingsPageVisibility",
+    "EnabledOutput": "hide:-",
+    "Enabled": false
   }
 ]
