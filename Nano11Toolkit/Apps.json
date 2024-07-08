@@ -19,5 +19,19 @@
     "Description": "Long term support version of Firefox",
     "WingetId": "Mozilla.Firefox.ESR",
     "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1024px-Firefox_logo%2C_2019.svg.png"
+  },
+  {
+    "Id": "startallback",
+    "Name": "StartAllBack",
+    "Description": "A paid Windows 11 customization tool",
+    "WingetId": "StartIsBack.StartAllBack",
+    "IconUrl": "https://static0.xdaimages.com/wordpress/wp-content/uploads/2024/04/startallback-logo.png"
+  },
+  {
+    "Id": "ntlite",
+    "Name": "NTLite",
+    "Description": "A Windows ISO modding tool",
+    "WingetId": "Nlitesoft.NTLite",
+    "IconUrl": "https://pbs.twimg.com/profile_images/512371152375672832/TXTgZGDX_400x400.png"
   }
 ]

@@ -21,6 +21,7 @@ namespace Nano11Toolkit.ViewModels.Windows
         {
             new NavigationViewItem()
             {
+
                 Content = $"Hi, {Environment.UserName}",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
