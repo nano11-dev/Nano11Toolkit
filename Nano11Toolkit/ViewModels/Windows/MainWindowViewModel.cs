@@ -21,15 +21,21 @@ namespace Nano11Toolkit.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Home",
+                Content = $"Hi, {Environment.UserName}",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             },
             new NavigationViewItem()
             {
                 Content = "General",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.AppGeneric24 },
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Wrench24 },
                 TargetPageType = typeof(Views.Pages.DataPage)
+            },
+            new NavigationViewItem()
+            {
+                Content= "Apps",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Apps24 },
+                TargetPageType = typeof(Views.Pages.AppsPage)
             }
         };
 

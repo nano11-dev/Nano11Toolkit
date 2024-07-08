@@ -1,0 +1,23 @@
+﻿[
+  {
+    "Id": "brave",
+    "Name": "Brave Browser",
+    "Description": "Privacy focused browser",
+    "WingetId": "Brave.Brave",
+    "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/5/51/Brave_icon_lionface.png"
+  },
+  {
+    "Id": "firefox",
+    "Name": "Firefox Browser",
+    "Description": "Privacy focused browser, by Mozilla",
+    "WingetId": "Mozilla.Firefox",
+    "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1024px-Firefox_logo%2C_2019.svg.png"
+  },
+  {
+    "Id": "firefoxesr",
+    "Name": "Firefox ESR Browser",
+    "Description": "Long term support version of Firefox",
+    "WingetId": "Mozilla.Firefox.ESR",
+    "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1024px-Firefox_logo%2C_2019.svg.png"
+  }
+]

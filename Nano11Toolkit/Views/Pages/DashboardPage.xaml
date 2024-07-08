@@ -16,12 +16,10 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid VerticalAlignment="Top">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <Label Grid.Column="1" Content="Use the items on the left to change pages" HorizontalAlignment="Center" Height="66" Foreground="{DynamicResource TextFillColorPrimaryBrush}" VerticalAlignment="Top" Width="308" FontSize="48"/>
+    <Grid VerticalAlignment="Top" Loaded="Grid_Loaded">
+        <Label x:Name="RAM">Installed RAM: Loading...</Label>
+        <Label x:Name="CPU" Margin="0,29,-87,-28" Content="CPU: Loading..."/>
+        <Label x:Name="Build" Margin="0,57,-87,-55" Content="Windows Build: Loading..."/>
+        <Label x:Name="Version" Margin="0,85,-87,-82" Content="Windows Version: Loading..."/>
     </Grid>
 </Page>

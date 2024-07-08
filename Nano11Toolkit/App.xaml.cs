@@ -49,10 +49,15 @@ namespace Nano11Toolkit
 
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
+
                 services.AddSingleton<DataPage>();
                 services.AddSingleton<TogglablesViewModel>();
+
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+
+                services.AddSingleton<AppsPage>();
+                services.AddSingleton<AppsViewModel>();
             }).Build();
 
         /// <summary>

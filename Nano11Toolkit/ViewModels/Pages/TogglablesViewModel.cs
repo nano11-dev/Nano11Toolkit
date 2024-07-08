@@ -11,22 +11,6 @@ namespace Nano11Toolkit.ViewModels.Pages
 {
     public partial class TogglablesViewModel : ObservableObject
     {
-        public static string jsonString =
-            """
-            [
-                {
-                    "Name": "Verbose Login",
-                    "Description": "Toggles verbose informations in the login screen",
-                    "EnableCommand": "reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v verbosestatus /t REG_DWORD /d 1 /f",
-                    "DisableCommand": "reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v verbosestatus /t REG_DWORD /d 0 /f",
-                    "QueryKey": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-                    "QueryValue": "verbosestatus",
-                    "EnabledOutput": "0x1",
-                    "Enabled": false
-                }
-            ]
-            """;
-
         [ObservableProperty]
         private TogglableEntry[] entries = JsonSerializer.Deserialize<TogglableEntry[]>(File.ReadAllText("ToggleTweaks.json"));
 
