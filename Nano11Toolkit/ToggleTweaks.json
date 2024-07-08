@@ -12,11 +12,21 @@
   {
     "Name": "Windows 11 Context Menu",
     "Description": "Toggles the windows 11 fancy context menu",
-    "EnableCommand": "reg delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f /ve && taskkill /f /im explorer.exe && start explorer.exe",
-    "DisableCommand": "reg add \"HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /ve /f && taskkill /f /im explorer.exe && start explorer.exe",
+    "EnableCommand": "reg delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f /ve",
+    "DisableCommand": "reg add \"HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\" /v InprocServer32 /t REG_DWORD /f",
     "QueryKey": "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}",
     "QueryValue": "InprocServer32",
     "EnabledOutput": "ERROR: The system was unable to find the specified registry key or value.",
+    "Enabled": false
+  },
+  {
+    "Name": "Windows Spotlight",
+    "Description": "Toggles Windows Spotlight: the buggy daily wallpaper feature in Windows 11",
+    "EnableCommand": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent\" /v DisableSpotlightCollectionOnDesktop /t REG_DWORD /d 0 /f",
+    "DisableCommand": "reg add \"HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\CloudContent\" /v DisableSpotlightCollectionOnDesktop /t REG_DWORD /d 1 /f",
+    "QueryKey": "HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+    "QueryValue": "DisableSpotlightCollectionOnDesktop",
+    "EnabledOutput": "0x0",
     "Enabled": false
   }
 ]
