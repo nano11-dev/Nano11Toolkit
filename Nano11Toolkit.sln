@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nano11Toolkit", "Nano11Toolkit\Nano11Toolkit.csproj", "{15661DA2-638F-428F-9126-D8B7272B024A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15661DA2-638F-428F-9126-D8B7272B024A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15661DA2-638F-428F-9126-D8B7272B024A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15661DA2-638F-428F-9126-D8B7272B024A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15661DA2-638F-428F-9126-D8B7272B024A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1721834C-4BA3-4D08-AE93-63AC1D3FF166}
+	EndGlobalSection
+EndGlobal
