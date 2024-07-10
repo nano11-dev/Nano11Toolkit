@@ -9,6 +9,7 @@ using Wpf.Ui.Controls;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace Nano11Toolkit.ViewModels.Pages
 {
@@ -38,6 +39,24 @@ namespace Nano11Toolkit.ViewModels.Pages
             return;
         }
 
+        private async Task InstallApp(Wpf.Ui.Controls.Button b, Grid parent, ApplicationEntry entry, string AppId)
+        {
+            InstallWingetPackage(AppId);
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                b.IsEnabled = false;
+                b.Content = "Installed!";
+                foreach (Control child in parent.Children)
+                {
+                    if (child.Name == entry.Id + "_spinner")
+                    {
+                        child.Visibility = System.Windows.Visibility.Hidden;
+                        break;
+                    }
+                }
+            });
+        }
+
         public bool IsInstalled(string PackageId)
         {
             ProcessStartInfo si = new ProcessStartInfo();
@@ -63,19 +82,11 @@ namespace Nano11Toolkit.ViewModels.Pages
                 {
                     if (child.Name == entry.Id + "_spinner")
                     {
-                        break;
                         child.Visibility = System.Windows.Visibility.Visible;
+                        break;
                     }
                 }
-                InstallWingetPackage(entry.WingetId);
-                foreach (Control child in parent.Children)
-                {
-                    if (child.Name == entry.Id + "_spinner")
-                    {
-                        child.Visibility = System.Windows.Visibility.Hidden;
-                    }
-                }
-                button.Content = "Installed!";
+                Task.Run(async () => InstallApp(button, parent, entry, entry.WingetId));
             }
         }
 
