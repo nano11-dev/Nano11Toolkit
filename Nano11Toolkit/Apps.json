@@ -33,5 +33,12 @@
     "Description": "A Windows ISO modding tool",
     "WingetId": "Nlitesoft.NTLite",
     "IconUrl": "https://pbs.twimg.com/profile_images/512371152375672832/TXTgZGDX_400x400.png"
+  },
+  {
+    "Id": "git",
+    "Name": "Git",
+    "Description": "A command-line tool for dev repositories stuff",
+    "WingetId": "Git.Git",
+    "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/1200px-Git_icon.svg.png"
   }
 ]
