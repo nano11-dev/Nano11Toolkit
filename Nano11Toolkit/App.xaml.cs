@@ -58,7 +58,17 @@ namespace Nano11Toolkit
 
                 services.AddSingleton<AppsPage>();
                 services.AddSingleton<AppsViewModel>();
+
+                // Add UpdateService
+                services.AddSingleton<UpdateService>();
             }).Build();
+
+        private readonly UpdateService _updateService;
+
+        public App()
+        {
+            _updateService = GetService<UpdateService>();
+        }
 
         /// <summary>
         /// Gets registered service.
@@ -74,8 +84,9 @@ namespace Nano11Toolkit
         /// <summary>
         /// Occurs when the application is loading.
         /// </summary>
-        private void OnStartup(object sender, StartupEventArgs e)
+        private async void OnStartup(object sender, StartupEventArgs e)
         {
+            await _updateService.CheckForUpdatesAsync();
             _host.Start();
         }
 
