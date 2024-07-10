@@ -33,7 +33,7 @@
     "Description": "A Windows ISO modding tool",
     "WingetId": "Nlitesoft.NTLite",
     "IconUrl": "https://pbs.twimg.com/profile_images/512371152375672832/TXTgZGDX_400x400.png"
-  }
+  },
   {
     "Id": "git",
     "Name": "Git",
