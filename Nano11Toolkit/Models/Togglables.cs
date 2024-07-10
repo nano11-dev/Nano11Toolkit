@@ -2,7 +2,6 @@
 
 namespace Nano11Toolkit.Models
 {
-
     public class TogglableEntry
     {
         public string Name { get; set; }
@@ -13,5 +12,10 @@ namespace Nano11Toolkit.Models
         public string QueryValue { get; set; }
         public string EnabledOutput { get; set; }
         public bool Enabled { get; set; }
+    }
+    public class ButtonEntry
+    {
+        public string Name { get; set; }
+        public string Command { get; set; }
     }
 }

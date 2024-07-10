@@ -14,13 +14,27 @@ namespace Nano11Toolkit.ViewModels.Pages
         [ObservableProperty]
         private TogglableEntry[] entries = JsonSerializer.Deserialize<TogglableEntry[]>(File.ReadAllText("ToggleTweaks.json"));
 
+        [ObservableProperty]
+        private ButtonEntry[] buttonEntries = JsonSerializer.Deserialize<ButtonEntry[]>(File.ReadAllText("ButtonTweaks.json"));
+
         public TogglablesViewModel()
         {
             ToggleCommand = new RelayCommand<ToggleSwitch>(OnToggle);
+            ClickCommand = new RelayCommand<Button>(OnClick);
             InitializeEntries();
         }
-
         public ICommand ToggleCommand { get; }
+        public ICommand ClickCommand {  get; }
+
+        private void OnClick(Button button)
+        {
+            if (button?.DataContext is ButtonEntry entry)
+            {
+                button.IsEnabled = false;
+                ExecuteCommand(entry.Command);
+                button.IsEnabled = true;
+            }
+        }
 
         private void OnToggle(ToggleSwitch toggleSwitch)
         {
@@ -51,13 +65,8 @@ namespace Nano11Toolkit.ViewModels.Pages
             startInfo.CreateNoWindow = true;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/c " + command;
-            startInfo.RedirectStandardError = true;
-            startInfo.RedirectStandardOutput = true;
             Process process = Process.Start(startInfo);
             process.WaitForExit();
-            string stdout = process.StandardOutput.ReadToEnd();
-            string stderr = process.StandardError.ReadToEnd();
-            Debug.WriteLine(stdout + stderr);
             Debug.WriteLine("Finished!");
         }
 
