@@ -47,24 +47,21 @@
     "Description": "A better version of 7-zip",
     "WingetId": "M2Team.NanaZip",
     "IconUrl": "https://store-images.s-microsoft.com/image/apps.51225.14049914514725900.83fe2639-d834-4bec-93ba-5d356b6e6eec.4960d057-b245-4768-a172-cfc901c14f74?h=210"
-  }
-],
+  },
    {
     "Id": "chrome",
     "Name": "Google Chrome",
     "Description": "The most popular web browser",
     "WingetId": "Google.Chrome",
     "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/64px-Google_Chrome_icon_%28February_2022%29.svg.png"
-  }
-],
+  },
    {
     "Id": "vscode",
     "Name": "Visual Studio Code",
     "Description": "One of the best code editorrs",
     "WingetId": "Microsoft.VisualStudioCode",
     "IconUrl": "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/visual-studio-code-icon.png"
-  }
-],
+  },
    {
     "Id": "files",
     "Name": "Files",
@@ -72,4 +69,4 @@
     "WingetId": "FilesCommunity.Files",
     "IconUrl": "https://seeklogo.com/images/F/files-logo-27812AB161-seeklogo.com.png"
   }
-],
+]
