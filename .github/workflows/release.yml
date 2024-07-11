@@ -59,4 +59,4 @@ jobs:
         artifacts: "Release"
         tag: "${{ github.ref_name }}"
         name: "${{ github.ref_name }}"
-        bodyFile: "README.md"
+        bodyFile: "../README.md"
