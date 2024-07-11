@@ -44,7 +44,9 @@ jobs:
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=Release
 
     - name: Build
-      run: msbuild $env:Project_Name /p:Configuration=Release
+      run: |
+        echo ${{ github.ref_name }} > Version.txt
+        msbuild $env:Project_Name /p:Configuration=Release
       
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
