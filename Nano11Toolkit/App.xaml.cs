@@ -6,6 +6,7 @@ using Nano11Toolkit.ViewModels.Pages;
 using Nano11Toolkit.ViewModels.Windows;
 using Nano11Toolkit.Views.Pages;
 using Nano11Toolkit.Views.Windows;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -58,7 +59,17 @@ namespace Nano11Toolkit
 
                 services.AddSingleton<AppsPage>();
                 services.AddSingleton<AppsViewModel>();
+
+                // Add UpdateService
+                services.AddSingleton<UpdateService>();
             }).Build();
+
+        private readonly UpdateService _updateService;
+
+        public App()
+        {
+            _updateService = GetService<UpdateService>();
+        }
 
         /// <summary>
         /// Gets registered service.
@@ -74,8 +85,10 @@ namespace Nano11Toolkit
         /// <summary>
         /// Occurs when the application is loading.
         /// </summary>
-        private void OnStartup(object sender, StartupEventArgs e)
+        private async void OnStartup(object sender, StartupEventArgs e)
         {
+            Debug.WriteLine("Running startup");
+            await _updateService.CheckForUpdatesAsync();
             _host.Start();
         }
 
