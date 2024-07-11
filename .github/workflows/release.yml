@@ -58,7 +58,7 @@ jobs:
     - name: Create Relese
       uses: ncipollo/release-action@v1.10.0
       with:
-        artifacts: "Release"
+        artifacts: "*"
         tag: "${{ github.ref_name }}"
         name: "${{ github.ref_name }}"
         bodyFile: "README.md"
