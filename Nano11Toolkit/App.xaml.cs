@@ -6,6 +6,7 @@ using Nano11Toolkit.ViewModels.Pages;
 using Nano11Toolkit.ViewModels.Windows;
 using Nano11Toolkit.Views.Pages;
 using Nano11Toolkit.Views.Windows;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -86,6 +87,7 @@ namespace Nano11Toolkit
         /// </summary>
         private async void OnStartup(object sender, StartupEventArgs e)
         {
+            Debug.WriteLine("Running startup");
             await _updateService.CheckForUpdatesAsync();
             _host.Start();
         }
