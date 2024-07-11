@@ -44,7 +44,7 @@ namespace Nano11Toolkit.Services
                     var release = JsonSerializer.Deserialize<GitHubRelease>(response);
                     Debug.WriteLine("Local version: " + LocalVersion);
                     Debug.WriteLine("Remote version: " +  release.TagName);
-                    if (new Version(release.TagName) > LocalVersion)
+                    if (new Version(release.TagName.Replace("v", "")) > LocalVersion)
                     {
                         await PromptUserToUpdate(release);
                     }
