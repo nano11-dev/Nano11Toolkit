@@ -32,7 +32,7 @@ jobs:
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
@@ -45,7 +45,7 @@ jobs:
 
     - name: Build
       run: |
-        echo ${{ github.ref_name }} > Version.txt
+        echo ${{ github.ref_name }} > Nano11Toolkit/Version.txt
         msbuild $env:Project_Name /p:Configuration=Release
       
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
