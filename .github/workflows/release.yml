@@ -60,7 +60,7 @@ jobs:
         filename: Release.zip
           
     - name: List
-      run: tree .
+      run: dir -Recurse
       
     - name: Create Relese
       uses: ncipollo/release-action@v1.10.0
