@@ -9,7 +9,6 @@ Nano11 Toolkit is a powerful and versatile tool designed to enhance your Windows
 - **Customization**: Personalize your Windows experience with various customization options.
 - **Optimization**: Improve system performance with optimization tools.
 - **Management**: Manage installed applications and system settings efficiently.
-- **Updates**: Keep your system up-to-date with the latest updates and patches.
 - **User-Friendly Interface**: Intuitive and easy-to-use interface for seamless navigation.
 
 ## Installation
