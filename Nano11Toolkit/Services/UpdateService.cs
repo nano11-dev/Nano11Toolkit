@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
+using Semver;
 
 namespace Nano11Toolkit.Services
 {
@@ -14,7 +15,7 @@ namespace Nano11Toolkit.Services
     {
 
         private const string GitHubApiUrl = "https://api.github.com/repos/nano11-dev/Nano11Toolkit/releases/latest";
-        private string LocalVersion = File.ReadAllText("Version.txt"); // Replace with actual local version
+        private Version LocalVersion = new Version(File.ReadAllText("Version.txt").Replace("v", "")); // Replace with actual local version
 
         public string GetTemporaryDirectory()
         {
@@ -43,7 +44,7 @@ namespace Nano11Toolkit.Services
                     var release = JsonSerializer.Deserialize<GitHubRelease>(response);
                     Debug.WriteLine("Local version: " + LocalVersion);
                     Debug.WriteLine("Remote version: " +  release.TagName);
-                    if (IsNewerVersion(release.TagName, LocalVersion))
+                    if (new Version(release.TagName) > LocalVersion)
                     {
                         await PromptUserToUpdate(release);
                     }
@@ -55,10 +56,7 @@ namespace Nano11Toolkit.Services
             }
         }
 
-        private bool IsNewerVersion(string latestVersion, string localVersion)
-        {
-            return string.Compare(latestVersion, localVersion, StringComparison.Ordinal) > 0;
-        }
+        
 
         private async Task PromptUserToUpdate(GitHubRelease release)
         {
