@@ -45,9 +45,6 @@ jobs:
 
     - name: Build
       run: msbuild $env:Project_Name /p:Configuration=Release
-        
-    - name: List
-      run: tree .
       
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
@@ -61,6 +58,9 @@ jobs:
       with:
           name: Release-${{ github.ref_name }}
           
+    - name: List
+      run: tree .
+      
     - name: Create Relese
       uses: ncipollo/release-action@v1.10.0
       with:
