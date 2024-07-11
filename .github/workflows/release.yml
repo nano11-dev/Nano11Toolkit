@@ -1,0 +1,71 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Publish
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    tags: [ "v*.*.*" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    permissions:
+        contents: write
+
+    runs-on: windows-latest  # For a list of available runner types, refer to
+                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+
+    env:
+      Solution_Name: Nano11Toolkit.sln                         # Replace with your solution name, i.e. MyWpfApp.sln
+      Project_Name: Nano11Toolkit/Nano11Toolkit.csproj
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+
+
+    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Restore the application
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=Release
+
+    - name: Build
+      run: msbuild $env:Project_Name /p:Configuration=Release
+      
+    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Release-${{ github.ref_name }}
+        path: "Nano11Toolkit/bin/Release/net8.0-windows/*"
+       
+    - name: ZIPs the contents
+      uses: TheDoctor0/zip-release@0.7.1
+      with:
+        directory: "Nano11Toolkit/bin/Release/net8.0-windows/"
+        filename: Release.zip
+          
+    - name: List
+      run: dir -Recurse
+      
+    - name: Create Relese
+      uses: ncipollo/release-action@v1.10.0
+      with:
+        artifacts: "Nano11Toolkit/bin/Release/net8.0-windows/Release.zip"
+        tag: "${{ github.ref_name }}"
+        name: "${{ github.ref_name }}"
+        bodyFile: "README.md"
