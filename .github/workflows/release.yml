@@ -55,6 +55,12 @@ jobs:
       with:
         name: Release-${{ github.ref_name }}
         path: "Nano11Toolkit/bin/Release/net8.0-windows/*"
+       
+    - name: Redownload artifact for some reason
+      uses: actions/download-artifact@v4
+      with:
+          name: Release-${{ github.ref_name }}
+          
     - name: Create Relese
       uses: ncipollo/release-action@v1.10.0
       with:
