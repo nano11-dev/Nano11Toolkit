@@ -51,14 +51,14 @@ jobs:
       
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: Release
+        name: Release-${{ github.ref_name }}
         path: "Nano11Toolkit/bin/Release/net8.0-windows/*"
     - name: Create Relese
       uses: ncipollo/release-action@v1.10.0
       with:
-        artifacts: "*"
+        artifacts: "Release-*"
         tag: "${{ github.ref_name }}"
         name: "${{ github.ref_name }}"
         bodyFile: "README.md"
