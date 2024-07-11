@@ -53,10 +53,11 @@ jobs:
         name: Release-${{ github.ref_name }}
         path: "Nano11Toolkit/bin/Release/net8.0-windows/*"
        
-    - name: Redownload artifact for some reason
-      uses: actions/download-artifact@v4
+    - name: ZIPs the contents
+      uses: TheDoctor0/zip-release@0.7.1
       with:
-          name: Release-${{ github.ref_name }}
+        directory: "Nano11Toolkit/bin/Release/net8.0-windows/"
+        filename: Release.zip
           
     - name: List
       run: tree .
