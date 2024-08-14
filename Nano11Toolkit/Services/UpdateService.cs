@@ -86,7 +86,6 @@ namespace Nano11Toolkit.Services
                             del /S /Q {AppDomain.CurrentDomain.BaseDirectory}\\*
                             move /y {Path.Combine([TempDir, "Extracted"])}\\* {AppDomain.CurrentDomain.BaseDirectory}\\
                             start {AppDomain.CurrentDomain.BaseDirectory}\\Nano11Toolkit.exe
-                            
                             """;
                         Debug.WriteLine(BatchFile);
                         File.WriteAllText(Path.Combine([TempDir, "update.bat"]), BatchFile);
