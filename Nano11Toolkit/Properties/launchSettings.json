@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Nano11Toolkit (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Nano11Toolkit (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
