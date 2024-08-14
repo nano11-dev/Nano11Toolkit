@@ -78,7 +78,7 @@ namespace Nano11Toolkit.Views.Pages
 
             // Perform any potentially long-running operation asynchronously
             var isInstalled = await Task.Run(() => viewModel.IsInstalled(e.WingetId));
-
+            Debug.WriteLine(isInstalled.ToString());
             // Update the UI on the UI thread
             Application.Current.Dispatcher.Invoke(() =>
             {

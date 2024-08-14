@@ -18,7 +18,6 @@
     <None Include="Usings.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="wpfui-icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
