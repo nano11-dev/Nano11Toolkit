@@ -54,6 +54,9 @@
     <None Update="Binaries\UninstallEdge.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Togglables.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Buttons.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

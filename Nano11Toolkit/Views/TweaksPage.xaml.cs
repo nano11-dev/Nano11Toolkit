@@ -78,11 +78,19 @@ namespace Nano11Toolkit.Views
 
         private ObservableCollection<ButtonEntry> buttons = new ObservableCollection<ButtonEntry>();
         public ObservableCollection<ButtonEntry> ButtonEntries { get { return buttons; } }
+
+        private ObservableCollection<TogglableEntry> togglables = new ObservableCollection<TogglableEntry>();
+        public ObservableCollection<TogglableEntry> TogglableEntries { get { return togglables; } }
         public TweaksPage()
         {
             foreach(var item in System.Text.Json.JsonSerializer.Deserialize<ButtonEntry[]>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Buttons.json"))))
             {
                 buttons.Add(item);
+            }
+
+            foreach (var item in System.Text.Json.JsonSerializer.Deserialize<TogglableEntry[]>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Togglables.json"))))
+            {
+                togglables.Add(item);
             }
             this.InitializeComponent();
             

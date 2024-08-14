@@ -28,7 +28,7 @@
                 </ItemsControl>
             </controls:UniformGrid>
             <controls:UniformGrid Columns="1" Margin="0,30,0,0">
-                <ItemsControl ItemsSource="{Binding Entries}">
+                <ItemsControl ItemsSource="{x:Bind TogglableEntries}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel />
@@ -38,7 +38,7 @@
                         <DataTemplate>
                             <ToggleSwitch Height="Auto" Width="Auto" Margin="0,10,0,0" IsOn="{Binding Enabled, Mode=TwoWay}" Toggled="ToggleSwitch_Click">
                                 <Grid Height="40" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock FontSize="48" FontWeight="SemiBold" Text="{Binding Name}"/>
+                                    <TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding Name}"/>
                                     <TextBlock Margin="0,23,0,-17" TextWrapping="Wrap" Text="{Binding Description}"/>
                                 </Grid>
                             </ToggleSwitch>
