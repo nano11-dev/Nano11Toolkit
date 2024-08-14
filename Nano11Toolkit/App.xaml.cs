@@ -33,6 +33,7 @@ namespace Nano11Toolkit
         public App()
         {
             this.InitializeComponent();
+
         }
 
         /// <summary>
@@ -43,6 +44,10 @@ namespace Nano11Toolkit
         {
             m_window = new MainWindow();
             m_window.Activate();
+            var res = new ResourceDictionary();
+            res.Source = new Uri("ms-appx:///UI/CrimsonUI.xaml");
+            Application.Current.FocusVisualKind = FocusVisualKind.Reveal;
+            Application.Current.Resources.MergedDictionaries.Add(res);
         }
 
         private Window m_window;

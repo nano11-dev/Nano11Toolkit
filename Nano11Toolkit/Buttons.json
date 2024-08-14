@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Name": "Install / Repair Microsoft Store",
+    "Command": "wsreset -i"
+  },
+  {
+    "Name": "Uninstall Edge",
+    "Command": "Binaries\\UninstallEdge.bat"
+  },
+  {
+    "Name": "Pause updates until 3000",
+    "Command": "reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings\" /v PauseUpdatesExpiryTime /t REG_SZ /d \"3000-12-31T1023:59Z\" /f"
+  }
+]
