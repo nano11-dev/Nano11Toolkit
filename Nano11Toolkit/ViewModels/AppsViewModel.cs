@@ -9,99 +9,98 @@ using Microsoft.UI.Xaml.Controls;
 using System.Threading.Tasks;
 using System;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Dispatching;
+using Windows.UI.Popups;
 
 namespace Nano11Toolkit.ViewModels
 {
     public partial class AppsViewModel : ObservableObject
     {
         [ObservableProperty]
-        public ApplicationEntry[] entries = JsonSerializer.Deserialize<ApplicationEntry[]>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Apps.json")));
+        private ApplicationEntry[] entries;
 
         public ICommand InstallCommand { get; }
         public ICommand RenameSpinnerCommand { get; }
 
-        private void InstallWingetPackage(string PackageId)
+        public AppsViewModel()
         {
-            ProcessStartInfo si = new ProcessStartInfo();
-            si.FileName = "winget.exe";
-            si.Arguments = $"install -e --id {PackageId}";
-            si.CreateNoWindow = true;
-            si.RedirectStandardOutput = true;
-            si.RedirectStandardError = true;
-            si.RedirectStandardInput = true;
-            var proc = Process.Start(si);
-            proc.WaitForExit();
-            Debug.WriteLine($"winget.exe install -e --id {PackageId}");
-            Debug.WriteLine(proc.StandardOutput.ReadToEnd());
-            Debug.WriteLine(proc.StandardError.ReadToEnd());
+            // Load entries from JSON file
+            string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Apps.json");
+            entries = JsonSerializer.Deserialize<ApplicationEntry[]>(File.ReadAllText(jsonFilePath));
 
-            return;
+            // Initialize commands
+            InstallCommand = new RelayCommand<Button>(OnClick);
+            RenameSpinnerCommand = new RelayCommand<ProgressRing>(RenameSpinner);
         }
 
-        private async Task InstallApp(Button b, Grid parent, ApplicationEntry entry, string AppId)
+        public void OnClick(Button button)
         {
-            InstallWingetPackage(AppId);
-            //Application.Current.Dispatcher.Invoke(() =>
-            //{
-            //    b.IsEnabled = false;
-            //    b.Content = "Installed!";
-            //    foreach (Control child in parent.Children)
-            //    {
-            //        if (child.Name == entry.Id + "_spinner")
-            //        {
-            //            child.Visibility = System.Windows.Visibility.Hidden;
-            //            break;
-            //        }
-            //    }
-            //});
-        }
-
-        public bool IsInstalled(string PackageId)
-        {
-            ProcessStartInfo si = new ProcessStartInfo();
-            si.FileName = "winget.exe";
-            si.Arguments = $"list -e -q {PackageId}";
-            si.CreateNoWindow = true;
-            si.RedirectStandardOutput = true;
-            si.RedirectStandardError = true;
-            si.RedirectStandardInput = true;
-            var proc = Process.Start(si);
-            proc.WaitForExit();
-            return proc.StandardOutput.ReadToEnd().Contains(PackageId);
-        }
-
-        private void OnClick(Button button)
-        {
+            Debug.WriteLine("Clicked something");
             if (button?.DataContext is ApplicationEntry entry)
             {
                 button.Content = "Installing...";
                 button.IsEnabled = false;
-                var parent = (Grid)button.Parent;
-                foreach (Control child in parent.Children)
-                {
-                    if (child.Name == entry.Id + "_spinner")
-                    {
-                        child.Visibility = Visibility.Visible;
-                        break;
-                    }
-                }
-                Task.Run(async () => InstallApp(button, parent, entry, entry.WingetId));
+
+               
+                // Run the installation on a background thread
+                Task.Run(async () => await InstallApp(button, entry, entry.WingetId));
             }
         }
 
-        private void RenameSpinner(ProgressRing spinner)
+        private async Task InstallApp(Button b, ApplicationEntry entry, string appId)
+        {
+            InstallWingetPackage(appId);
+            DispatcherQueue dispatcherQueue = DispatcherQueue.GetForCurrentThread();
+            // Use DispatcherQueue to update UI elements on the UI threa
+            
+        }
+
+
+
+        private void InstallWingetPackage(string packageId)
+        {
+            var si = new ProcessStartInfo
+            {
+                FileName = "winget.exe",
+                Arguments = $"install -e --id {packageId}",
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+
+            using var proc = Process.Start(si);
+            proc.WaitForExit();
+
+            Debug.WriteLine($"winget.exe install -e --id {packageId}");
+            Debug.WriteLine(proc.StandardOutput.ReadToEnd());
+            Debug.WriteLine(proc.StandardError.ReadToEnd());
+        }
+
+        public bool IsInstalled(string packageId)
+        {
+            var si = new ProcessStartInfo
+            {
+                FileName = "winget.exe",
+                Arguments = $"list -e -q {packageId}",
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+
+            using var proc = Process.Start(si);
+            proc.WaitForExit();
+
+            return proc.StandardOutput.ReadToEnd().Contains(packageId);
+        }
+
+        public void RenameSpinner(ProgressRing spinner)
         {
             if (spinner?.DataContext is ApplicationEntry entry)
             {
                 spinner.Name = entry.Id + "_spinner";
+                Debug.WriteLine(spinner?.Name.ToString());
                 spinner.Visibility = Visibility.Collapsed;
             }
-        }
-
-        public AppsViewModel()
-        {
-            InstallCommand = new RelayCommand<Button>(OnClick);
-            RenameSpinnerCommand = new RelayCommand<ProgressRing>(RenameSpinner);
         }
     }
 }

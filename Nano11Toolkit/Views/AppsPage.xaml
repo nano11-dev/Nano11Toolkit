@@ -8,9 +8,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
-
-    <controls:UniformGrid Columns="1" VerticalAlignment="Top">
-        <ItemsControl ItemsSource="{Binding Entries}">
+    <ScrollView>
+        
+    <controls:UniformGrid Columns="1" VerticalAlignment="Top" Margin="0,4,4,4">
+        <ItemsControl ItemsSource="{x:Bind Apps}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel />
@@ -29,7 +30,7 @@
                             <Grid>
                                 <TextBlock Margin="60,2,-60,9" Text="{Binding Name}"></TextBlock>
                                 <TextBlock Margin="60,22,-60,-16" Text="{Binding Description}"></TextBlock>
-                                <ProgressRing x:Name="TempSpinner" Margin="0,0,110,0" Loaded="TempSpinner_Loaded" HorizontalAlignment="Right" Height="20" Width="20"  IsIndeterminate="True" />
+                                <ProgressRing x:Name="TempSpinner" Margin="0,0,110,0" Loaded="TempSpinner_Loaded" Visibility="Collapsed" HorizontalAlignment="Right" Height="20" Width="20"  IsIndeterminate="True" />
                                 <Button Loaded="Button_Loaded" Click="Button_Click" Width="80" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center">Install</Button>
                             </Grid>
                         </Grid>
@@ -38,4 +39,5 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </controls:UniformGrid>
+    </ScrollView>
 </Page>

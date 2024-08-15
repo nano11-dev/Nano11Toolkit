@@ -10,6 +10,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Nano11Toolkit.ViewModels;
 using Nano11Toolkit.Models;
+using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,13 +25,18 @@ namespace Nano11Toolkit.Views
         public AppsPage()
         {
             this.InitializeComponent();
+            foreach (var item in viewModel.Entries)
+            {
+                Apps.Add(item);
+            }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Debug.WriteLine("Clicked stuff");
             if (sender is Button button && button.DataContext is ApplicationEntry entry)
             {
-                var viewModel = DataContext as AppsViewModel;
-                viewModel?.InstallCommand.Execute(button);
+                Debug.WriteLine("Clicked some something");
+                viewModel?.OnClick(button);
             }
         }
 
@@ -38,8 +44,7 @@ namespace Nano11Toolkit.Views
         {
             if (sender is ProgressRing spinner && spinner.DataContext is ApplicationEntry entry)
             {
-                var viewModel = DataContext as AppsViewModel;
-                viewModel?.RenameSpinnerCommand.Execute(spinner);
+                viewModel?.RenameSpinner(spinner);
             }
         }
 
@@ -73,6 +78,7 @@ namespace Nano11Toolkit.Views
         }
 
         public AppsViewModel viewModel = new AppsViewModel();
+        public ObservableCollection<ApplicationEntry> Apps = new ObservableCollection<ApplicationEntry>();
 
         private async Task CheckButton(Button b, ApplicationEntry e)
         {

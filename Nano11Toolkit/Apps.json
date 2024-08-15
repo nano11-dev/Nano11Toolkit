@@ -1,42 +1,72 @@
 ﻿[
   {
-    "Name": "Verbose Login",
-    "Description": "Toggles verbose informations in the login screen",
-    "EnableCommand": "reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v verbosestatus /t REG_DWORD /d 1 /f",
-    "DisableCommand": "reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v verbosestatus /t REG_DWORD /d 0 /f",
-    "QueryKey": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-    "QueryValue": "verbosestatus",
-    "EnabledOutput": "0x1",
-    "Enabled": false
+    "Id": "brave",
+    "Name": "Brave Browser",
+    "Description": "Privacy focused browser",
+    "WingetId": "Brave.Brave",
+    "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/5/51/Brave_icon_lionface.png"
   },
   {
-    "Name": "Windows 11 Context Menu",
-    "Description": "Toggles the windows 11 fancy context menu",
-    "EnableCommand": "reg delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f /ve && taskkill /f /im explorer.exe && start explorer.exe",
-    "DisableCommand": "reg add \"HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /ve /f && taskkill /f /im explorer.exe && start explorer.exe",
-    "QueryKey": "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}",
-    "QueryValue": "InprocServer32",
-    "EnabledOutput": "ERROR: The system was unable to find the specified registry key or value.",
-    "Enabled": false
+    "Id": "firefox",
+    "Name": "Firefox Browser",
+    "Description": "Privacy focused browser, by Mozilla",
+    "WingetId": "Mozilla.Firefox",
+    "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1024px-Firefox_logo%2C_2019.svg.png"
   },
   {
-    "Name": "Windows Spotlight",
-    "Description": "Toggles Windows Spotlight: the buggy daily wallpaper feature in Windows 11",
-    "EnableCommand": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent\" /v DisableSpotlightCollectionOnDesktop /t REG_DWORD /d 0 /f",
-    "DisableCommand": "reg add \"HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\CloudContent\" /v DisableSpotlightCollectionOnDesktop /t REG_DWORD /d 1 /f",
-    "QueryKey": "HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
-    "QueryValue": "DisableSpotlightCollectionOnDesktop",
-    "EnabledOutput": "0x0",
-    "Enabled": false
+    "Id": "firefoxesr",
+    "Name": "Firefox ESR Browser",
+    "Description": "Long term support version of Firefox",
+    "WingetId": "Mozilla.Firefox.ESR",
+    "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1024px-Firefox_logo%2C_2019.svg.png"
   },
   {
-    "Name": "Settings Home Page",
-    "Description": "Toggles PUP.SettingsHome",
-    "EnableCommand": "reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v SettingsPageVisibility /t REG_SZ /d \"hide:-\" /f",
-    "DisableCommand": "reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v SettingsPageVisibility /t REG_SZ /d \"hide:home\" /f",
-    "QueryKey": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
-    "QueryValue": "SettingsPageVisibility",
-    "EnabledOutput": "hide:-",
-    "Enabled": false
+    "Id": "startallback",
+    "Name": "StartAllBack",
+    "Description": "A paid Windows 11 customization tool",
+    "WingetId": "StartIsBack.StartAllBack",
+    "IconUrl": "https://static0.xdaimages.com/wordpress/wp-content/uploads/2024/04/startallback-logo.png"
+  },
+  {
+    "Id": "ntlite",
+    "Name": "NTLite",
+    "Description": "A Windows ISO modding tool",
+    "WingetId": "Nlitesoft.NTLite",
+    "IconUrl": "https://pbs.twimg.com/profile_images/512371152375672832/TXTgZGDX_400x400.png"
+  },
+  {
+    "Id": "git",
+    "Name": "Git",
+    "Description": "A command-line tool for dev repositories stuff",
+    "WingetId": "Git.Git",
+    "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/1200px-Git_icon.svg.png"
+  },
+  {
+    "Id": "nanazip",
+    "Name": "NanaZip",
+    "Description": "A better version of 7-zip",
+    "WingetId": "M2Team.NanaZip",
+    "IconUrl": "https://store-images.s-microsoft.com/image/apps.51225.14049914514725900.83fe2639-d834-4bec-93ba-5d356b6e6eec.4960d057-b245-4768-a172-cfc901c14f74?h=210"
+  },
+  {
+    "Id": "chrome",
+    "Name": "Google Chrome",
+    "Description": "The most popular web browser",
+    "WingetId": "Google.Chrome",
+    "IconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/64px-Google_Chrome_icon_%28February_2022%29.svg.png"
+  },
+  {
+    "Id": "vscode",
+    "Name": "Visual Studio Code",
+    "Description": "One of the best code editorrs",
+    "WingetId": "Microsoft.VisualStudioCode",
+    "IconUrl": "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/visual-studio-code-icon.png"
+  },
+  {
+    "Id": "files",
+    "Name": "Files",
+    "Description": "A community-made File Explorer replacement",
+    "WingetId": "FilesCommunity.Files",
+    "IconUrl": "https://seeklogo.com/images/F/files-logo-27812AB161-seeklogo.com.png"
   }
 ]
