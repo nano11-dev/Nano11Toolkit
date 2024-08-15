@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:Nano11Toolkit.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
-    d:DataContext="{d:DesignInstance local:DataPage,
+    d:DataContext="{d:DesignInstance local:TweaksPage,
                                      IsDesignTimeCreatable=False}"
     mc:Ignorable="d">
 

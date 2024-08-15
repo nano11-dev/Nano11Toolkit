@@ -17,7 +17,7 @@
         <Grid
             x:Name="AppTitleBar"
             Height="48"
-            Margin="48,0,0,0"
+            Margin="64,0,0,0"
             VerticalAlignment="Top"
             Padding="0">
             <Grid.ColumnDefinitions>
@@ -41,10 +41,12 @@
 
         <NavigationView
             x:Name="NavigationViewControl"
-            IsTitleBarAutoPaddingEnabled="False"
             AlwaysShowHeader="True"
+            Padding="-16,0,0,0"
             Header="Home"
-            IsTabStop="False" 
+            IsTitleBarAutoPaddingEnabled="True"
+            IsTabStop="False"
+            PaneDisplayMode="LeftCompact"
             BackRequested="NavigationViewControl_BackRequested" 
             ItemInvoked="NavigationViewControl_ItemInvoked">
             <NavigationView.MenuItems>
@@ -65,7 +67,7 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
 
-            <Frame x:Name="ContentFrame" Padding="55,10,0,0"  Navigated="ContentFrame_Navigated"/>
+            <Frame x:Name="ContentFrame" Padding="55,0,0,0"  Navigated="ContentFrame_Navigated"/>
         </NavigationView>
     </Grid>
 </Window>
