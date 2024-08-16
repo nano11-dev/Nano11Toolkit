@@ -27,7 +27,7 @@ namespace Nano11Toolkit
     {
         public string GetAppTitleFromSystem()
         {
-            return Windows.ApplicationModel.Package.Current.DisplayName;
+            return "Nano11 Toolkit";
         }
 
 

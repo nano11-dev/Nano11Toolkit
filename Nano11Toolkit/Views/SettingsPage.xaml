@@ -9,7 +9,7 @@
     mc:Ignorable="d">
     <Grid>
         <TextBlock>
-            Hi!
+            There are currently no settings. Please check back later.
         </TextBlock>
     </Grid>
 </Page>

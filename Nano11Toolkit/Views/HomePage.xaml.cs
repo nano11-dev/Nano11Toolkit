@@ -79,19 +79,7 @@ namespace Nano11Toolkit.Views
     /// </summary>
     public sealed partial class HomePage : Page
     {
-        public static long GetTotalUsedRAM()
-        {
 
-            using var memCounter = new PerformanceCounter("Memory", "Available Bytes");
-            // Get the total physical memory available
-            long availableBytes = memCounter.RawValue;
-
-            // Total physical memory is typically available in the "Memory" category
-
-            // Calculate used memory
-            ulong usedMemoryBytes = DeviceStatus.GetInstalledRAM() - (ulong)availableBytes;
-            return (long)usedMemoryBytes;
-        }
 
         public HomePage()
         {
@@ -114,8 +102,17 @@ namespace Nano11Toolkit.Views
             CPU.Text = "CPU: " + Registry.LocalMachine.OpenSubKey("HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0").GetValue("ProcessorNameString");
             RAM.Text = $"Installed RAM: {DeviceStatus.GetInstalledRAM() / (1000 * 1000 * 1000)} GB";
             Build.Text = $"Windows Build: {build}";
-        }
 
-        public long UsedRAM = GetTotalUsedRAM() / (long)DeviceStatus.GetInstalledRAM();
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+            int latestPadding = 60;
+            foreach (DriveInfo d in allDrives)
+            {
+                latestPadding += 20;
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = $"Drive {d.Name} : {d.TotalFreeSpace / 1000 / 1000 / 1000}GB / {d.TotalSize / 1000 / 1000 /1000}GB";
+                textBlock.Margin = new Thickness(0, latestPadding, 0, 0);
+                BaseGrid.Children.Add(textBlock);
+            }
+        }
     }
 }

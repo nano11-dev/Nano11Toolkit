@@ -9,14 +9,13 @@
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
-    <controls:UniformGrid Rows="4" Columns="1" Height="200">
-        <ProgressRing Grid.Row="1" x:Name="RAMStatus" Value="{Binding UsedRAM}" IsIndeterminate="False" HorizontalAlignment="Left" VerticalAlignment="Center" />
+    <Grid x:Name="BaseGrid" VerticalAlignment="Top" Height="200">
         <TextBlock Grid.Row="1" x:Name="RAM">Please wait...</TextBlock>
 
-        <TextBlock x:Name="CPU">Please wait...</TextBlock>
+        <TextBlock Margin="0,20,0,0" x:Name="CPU">Please wait...</TextBlock>
 
-        <TextBlock x:Name="Version">Please wait...</TextBlock>
-        <TextBlock x:Name="Build">Please wait...</TextBlock>
+        <TextBlock Margin="0,40,0,0" x:Name="Version">Please wait...</TextBlock>
+        <TextBlock Margin="0,60,0,0" x:Name="Build">Please wait...</TextBlock>
        
-    </controls:UniformGrid>
+    </Grid>
 </Page>
