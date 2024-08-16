@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Nano11Toolkit.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nano11Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ic="using:FluentIcons.WinUI"
+    mc:Ignorable="d">
+    
+    <Window.SystemBackdrop>
+        <MicaBackdrop Kind="BaseAlt"/>
+    </Window.SystemBackdrop>
+
+    <Grid>
+        <Grid
+            x:Name="AppTitleBar"
+            Height="48"
+            Margin="64,0,0,0"
+            VerticalAlignment="Top"
+            Padding="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image
+                x:Name="AppFontIcon"
+                Width="16"
+                Height="16"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Source="/Assets/Square44x44Logo.png" />
+            <TextBlock
+                Margin="12,0,0,0"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Text="{x:Bind GetAppTitleFromSystem()}"/>
+        </Grid>
+
+        <NavigationView
+            x:Name="NavigationViewControl"
+            AlwaysShowHeader="True"
+            Padding="-16,0,0,0"
+            Header="Home"
+            IsTitleBarAutoPaddingEnabled="True"
+            IsTabStop="False"
+            PaneDisplayMode="LeftCompact"
+            BackRequested="NavigationViewControl_BackRequested" 
+            ItemInvoked="NavigationViewControl_ItemInvoked">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Home" Tag="Nano11Toolkit.Views.HomePage" >
+                    <NavigationViewItem.Icon>
+                        <ic:SymbolIcon Symbol="Home" IconVariant="Regular" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Tweaks" Tag="Nano11Toolkit.Views.TweaksPage" >
+                    <NavigationViewItem.Icon>
+                        <ic:SymbolIcon Symbol="Wrench" FontSize="32" IconVariant="Regular" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Apps" Tag="Nano11Toolkit.Views.AppsPage" >
+                    <NavigationViewItem.Icon>
+                        <ic:SymbolIcon Symbol="Apps" IconVariant="Regular" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <Frame x:Name="ContentFrame" Padding="55,0,0,0"  Navigated="ContentFrame_Navigated"/>
+        </NavigationView>
+    </Grid>
+</Window>

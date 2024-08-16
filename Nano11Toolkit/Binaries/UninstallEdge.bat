@@ -1,4 +1,4 @@
-﻿@echo off
+﻿﻿@echo off
 :init
  setlocal DisableDelayedExpansion
  set cmdInvoke=1

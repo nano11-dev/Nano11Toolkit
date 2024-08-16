@@ -1,113 +1,55 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Nano11Toolkit.Services;
-using Nano11Toolkit.ViewModels.Pages;
-using Nano11Toolkit.ViewModels.Windows;
-using Nano11Toolkit.Views.Pages;
-using Nano11Toolkit.Views.Windows;
-using System.Diagnostics;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Shapes;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using System.Windows;
-using System.Windows.Threading;
-using Wpf.Ui;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+
+// To learn more about WinUI, the WinUI project structure,
+// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Nano11Toolkit
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public partial class App
+    public partial class App : Application
     {
-        // The.NET Generic Host provides dependency injection, configuration, logging, and other services.
-        // https://docs.microsoft.com/dotnet/core/extensions/generic-host
-        // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
-        // https://docs.microsoft.com/dotnet/core/extensions/configuration
-        // https://docs.microsoft.com/dotnet/core/extensions/logging
-        private static readonly IHost _host = Host
-            .CreateDefaultBuilder()
-            .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
-            .ConfigureServices((context, services) =>
-            {
-                services.AddHostedService<ApplicationHostService>();
-
-                // Page resolver service
-                services.AddSingleton<IPageService, PageService>();
-
-                // Theme manipulation
-                services.AddSingleton<IThemeService, ThemeService>();
-
-                // TaskBar manipulation
-                services.AddSingleton<ITaskBarService, TaskBarService>();
-
-                // Service containing navigation, same as INavigationWindow... but without window
-                services.AddSingleton<INavigationService, NavigationService>();
-
-                // Main window with navigation
-                services.AddSingleton<INavigationWindow, MainWindow>();
-                services.AddSingleton<MainWindowViewModel>();
-
-                services.AddSingleton<DashboardPage>();
-                services.AddSingleton<DashboardViewModel>();
-
-                services.AddSingleton<DataPage>();
-                services.AddSingleton<TogglablesViewModel>();
-
-                services.AddSingleton<SettingsPage>();
-                services.AddSingleton<SettingsViewModel>();
-
-                services.AddSingleton<AppsPage>();
-                services.AddSingleton<AppsViewModel>();
-
-                // Add UpdateService
-                services.AddSingleton<UpdateService>();
-            }).Build();
-
-        private readonly UpdateService _updateService;
-
+        /// <summary>
+        /// Initializes the singleton application object.  This is the first line of authored code
+        /// executed, and as such is the logical equivalent of main() or WinMain().
+        /// </summary>
         public App()
         {
-            _updateService = GetService<UpdateService>();
+            this.InitializeComponent();
+
         }
 
         /// <summary>
-        /// Gets registered service.
+        /// Invoked when the application is launched.
         /// </summary>
-        /// <typeparam name="T">Type of the service to get.</typeparam>
-        /// <returns>Instance of the service or <see langword="null"/>.</returns>
-        public static T GetService<T>()
-            where T : class
+        /// <param name="args">Details about the launch request and process.</param>
+        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            return _host.Services.GetService(typeof(T)) as T;
+            m_window = new MainWindow();
+            m_window.Activate();
+            var res = new ResourceDictionary();
+            res.Source = new Uri("ms-appx:///UI/CrimsonUI.xaml");
+            Application.Current.FocusVisualKind = FocusVisualKind.Reveal;
+            Application.Current.Resources.MergedDictionaries.Add(res);
         }
 
-        /// <summary>
-        /// Occurs when the application is loading.
-        /// </summary>
-        private async void OnStartup(object sender, StartupEventArgs e)
-        {
-            Debug.WriteLine("Running startup");
-            await _updateService.CheckForUpdatesAsync();
-            _host.Start();
-        }
-
-        /// <summary>
-        /// Occurs when the application is closing.
-        /// </summary>
-        private async void OnExit(object sender, ExitEventArgs e)
-        {
-            await _host.StopAsync();
-
-            _host.Dispose();
-        }
-
-        /// <summary>
-        /// Occurs when an exception is thrown by an application but not handled.
-        /// </summary>
-        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
-        }
+        private Window m_window;
     }
 }

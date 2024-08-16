@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Nano11Toolkit.Views.AppsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nano11Toolkit.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    mc:Ignorable="d">
+    <ScrollView>
+        
+    <controls:UniformGrid Columns="1" VerticalAlignment="Top" Margin="0,4,4,4">
+        <ItemsControl ItemsSource="{x:Bind Apps}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel 
+                        CornerRadius="8"
+                        Padding="12"
+                        BorderThickness="1"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                        <Grid>
+                            <Image Source="{Binding IconUrl}" Height="50" Margin="0,0,360,0" HorizontalAlignment="Left"/>
+                            <Grid>
+                                <TextBlock Margin="60,2,-60,9" Text="{Binding Name}"></TextBlock>
+                                <TextBlock Margin="60,22,-60,-16" Text="{Binding Description}"></TextBlock>
+                                <ProgressRing x:Name="TempSpinner" Margin="0,0,110,0" Loaded="TempSpinner_Loaded" Visibility="Collapsed" HorizontalAlignment="Right" Height="20" Width="20"  IsIndeterminate="True" />
+                                <Button Loaded="Button_Loaded" Click="Button_Click" Width="80" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center">Install</Button>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </controls:UniformGrid>
+    </ScrollView>
+</Page>
