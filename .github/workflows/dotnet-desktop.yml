@@ -66,7 +66,8 @@ jobs:
     # Remove the pfx
     - name: Remove the pfx
       run: Remove-Item -path GitHubActionsWorkflow.pfx
-
+    - name: Run tree
+      run: tree .
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload MSIX package
       uses: actions/upload-artifact@v2
