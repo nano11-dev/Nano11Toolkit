@@ -6,9 +6,17 @@
     xmlns:local="using:Nano11Toolkit.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
-    <Grid>
-        <TextBlock>Hello, world!</TextBlock>
-    </Grid>
+    <controls:UniformGrid Rows="4" Columns="1" Height="200">
+        <ProgressRing Grid.Row="1" x:Name="RAMStatus" Value="{Binding UsedRAM}" IsIndeterminate="False" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="1" x:Name="RAM">Please wait...</TextBlock>
+
+        <TextBlock x:Name="CPU">Please wait...</TextBlock>
+
+        <TextBlock x:Name="Version">Please wait...</TextBlock>
+        <TextBlock x:Name="Build">Please wait...</TextBlock>
+       
+    </controls:UniformGrid>
 </Page>

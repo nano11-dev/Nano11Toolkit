@@ -30,13 +30,16 @@ namespace Nano11Toolkit.Views
                 Apps.Add(item);
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Clicked stuff");
             if (sender is Button button && button.DataContext is ApplicationEntry entry)
             {
                 Debug.WriteLine("Clicked some something");
-                viewModel?.OnClick(button);
+                await Install(button, entry);
             }
         }
 
@@ -63,22 +66,79 @@ namespace Nano11Toolkit.Views
                 button.Content = "...";
                 try
                 {
+                    Debug.WriteLine("Checking " +  entry.Name);
                     await CheckButton(button, entry);
                 }
                 catch (Exception ex)
                 {
                     // Log or handle exception
                     Console.WriteLine($"Exception caught: {ex.Message}");
-                    //Application.Current.Dispatcher.Invoke(() =>
-                    //{
-                    //    System.Windows.MessageBox.Show($"Exception: {ex.Message}");
-                    //});
                 }
             }
         }
 
         public AppsViewModel viewModel = new AppsViewModel();
         public ObservableCollection<ApplicationEntry> Apps = new ObservableCollection<ApplicationEntry>();
+
+        private async Task Install(Button b, ApplicationEntry entry)
+        {
+            Debug.WriteLine("Clicked something");
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                b.Content = "Installing";
+                var parent = b.Parent as Grid;
+
+                foreach (var item in parent.Children)
+                {
+                    Debug.WriteLine(item);
+                    try
+                    {
+                        ProgressRing ring = item as ProgressRing;
+                        item.Visibility = Visibility.Visible;
+                    }
+                    catch
+                    {
+                        Debug.WriteLine("Not a progressring");
+                    }
+                }
+            });
+
+                // Run the installation on a background thread
+            var isCompleted = await Task.Run(async () => viewModel.InstallWingetPackage(entry.WingetId));
+            Debug.WriteLine($"{isCompleted.ToString()}");
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                var p = b.Parent as Grid;
+                foreach (var item in p.Children)
+                {
+                    Debug.WriteLine(item);
+                    try
+                    {
+                        ProgressRing ring = item as ProgressRing;
+                        if (ring != null)
+                        {
+                            item.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                    catch
+                    {
+                        Debug.WriteLine("Not a progressring");
+                    }
+                }
+                if (isCompleted)
+                {
+                    b.Content = "Installed!";
+                    var parent = b.Parent as Grid;
+                    ProgressRing spinner = parent.FindName(entry.Id + "_spinner") as ProgressRing;
+                    spinner.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    b.Content = "Failed :(";
+                }
+            });
+        }
+        
 
         private async Task CheckButton(Button b, ApplicationEntry e)
         {

@@ -19,45 +19,15 @@ namespace Nano11Toolkit.ViewModels
         [ObservableProperty]
         private ApplicationEntry[] entries;
 
-        public ICommand InstallCommand { get; }
-        public ICommand RenameSpinnerCommand { get; }
-
         public AppsViewModel()
         {
             // Load entries from JSON file
             string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Apps.json");
             entries = JsonSerializer.Deserialize<ApplicationEntry[]>(File.ReadAllText(jsonFilePath));
 
-            // Initialize commands
-            InstallCommand = new RelayCommand<Button>(OnClick);
-            RenameSpinnerCommand = new RelayCommand<ProgressRing>(RenameSpinner);
         }
 
-        public void OnClick(Button button)
-        {
-            Debug.WriteLine("Clicked something");
-            if (button?.DataContext is ApplicationEntry entry)
-            {
-                button.Content = "Installing...";
-                button.IsEnabled = false;
-
-               
-                // Run the installation on a background thread
-                Task.Run(async () => await InstallApp(button, entry, entry.WingetId));
-            }
-        }
-
-        private async Task InstallApp(Button b, ApplicationEntry entry, string appId)
-        {
-            InstallWingetPackage(appId);
-            DispatcherQueue dispatcherQueue = DispatcherQueue.GetForCurrentThread();
-            // Use DispatcherQueue to update UI elements on the UI threa
-            
-        }
-
-
-
-        private void InstallWingetPackage(string packageId)
+        public bool InstallWingetPackage(string packageId)
         {
             var si = new ProcessStartInfo
             {
@@ -74,6 +44,7 @@ namespace Nano11Toolkit.ViewModels
             Debug.WriteLine($"winget.exe install -e --id {packageId}");
             Debug.WriteLine(proc.StandardOutput.ReadToEnd());
             Debug.WriteLine(proc.StandardError.ReadToEnd());
+            return (bool)(proc.ExitCode == 0);
         }
 
         public bool IsInstalled(string packageId)
