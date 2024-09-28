@@ -11,6 +11,7 @@
         public string EnabledOutput { get; set; }
         public bool Enabled { get; set; }
     }
+
     public class ButtonEntry
     {
         public string Name { get; set; }

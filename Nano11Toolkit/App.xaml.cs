@@ -47,7 +47,6 @@ namespace Nano11Toolkit
             res.Source = new Uri("ms-appx:///UI/CrimsonUI.xaml");
             Application.Current.FocusVisualKind = FocusVisualKind.Reveal;
             Application.Current.Resources.MergedDictionaries.Add(res);
-            System.Text.Json.JsonSerializerOptions.Default.JsonSerializerIsReflectionEnabledByDefault = true;
         }
 
         private Window m_window;

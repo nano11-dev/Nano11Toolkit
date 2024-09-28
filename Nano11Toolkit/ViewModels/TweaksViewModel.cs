@@ -13,11 +13,15 @@ namespace Nano11Toolkit.ViewModels
 {
     public partial class TweaksViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private TogglableEntry[] toggleEntries = JsonSerializer.Deserialize<TogglableEntry[]>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Togglables.json")));
+        public static string te = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Togglables.json"));
 
         [ObservableProperty]
-        private ButtonEntry[] buttonEntries = JsonSerializer.Deserialize<ButtonEntry[]>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Buttons.json")));
+        private TogglableEntry[] toggleEntries = JsonSerializer.Deserialize<TogglableEntry[]>(te, Nano11Toolkit.Serialization.Nano11JsonContext.Default.TogglableEntryArray);
+
+        public static string en = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Buttons.json"));
+
+        [ObservableProperty]
+        private ButtonEntry[] buttonEntries = JsonSerializer.Deserialize<ButtonEntry[]>(en, Nano11Toolkit.Serialization.Nano11JsonContext.Default.ButtonEntryArray);
 
         public TweaksViewModel()
         {

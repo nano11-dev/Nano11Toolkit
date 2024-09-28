@@ -23,7 +23,7 @@ namespace Nano11Toolkit.ViewModels
         {
             // Load entries from JSON file
             string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Apps.json");
-            entries = JsonSerializer.Deserialize<ApplicationEntry[]>(File.ReadAllText(jsonFilePath));
+            entries = JsonSerializer.Deserialize<ApplicationEntry[]>(File.ReadAllText(jsonFilePath), Serialization.Nano11JsonContext.Default.ApplicationEntryArray);
 
         }
 
