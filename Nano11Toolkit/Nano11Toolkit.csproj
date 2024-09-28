@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 	  <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	  <OutputType>WinExe</OutputType>
@@ -51,6 +51,14 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="C:\Users\StarNumber\.nuget\packages\fluenticons.winui\1.1.253\contentFiles\any\net7.0-windows10.0.17763\FluentIcons.WinUI\Assets\FluentSystemIcons.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="C:\Users\StarNumber\.nuget\packages\fluenticons.winui\1.1.253\contentFiles\any\net7.0-windows10.0.17763\FluentIcons.WinUI\Assets\SeagullFluentIcons.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Update="Binaries\UninstallEdge.bat">
